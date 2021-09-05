@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use MakelarisJR\Laravel2FA\Http\Controllers\Verify2FAController;
 

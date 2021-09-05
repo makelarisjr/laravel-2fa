@@ -19,12 +19,23 @@ class Laravel2FA
         );
     }
 
+    /**
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     */
     public function generateSecretKey(): string
     {
         return $this->google2fa->generateSecretKey();
     }
 
-    public function verifyGoogleOTP(string $otp, string $secret): bool
+    /**
+     * @return bool|int
+     * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+     * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+     * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+     */
+    public function verifyGoogleOTP(string $otp, string $secret)
     {
         return $this->google2fa->verifyKey(
             $secret,

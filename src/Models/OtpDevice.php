@@ -2,9 +2,23 @@
 
 namespace MakelarisJR\Laravel2FA\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int    $id
+ * @property string $name
+ * @property string $type
+ * @property string $otp_secret
+ * @property string $model_type
+ * @property int    $model_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read Collection $models
+ */
 class OtpDevice extends Model
 {
     const TYPE_GOOGLE  = 'google';

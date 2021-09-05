@@ -22,7 +22,7 @@ class Yubikey
         $this->client     = new Client();
     }
 
-    public function verifyOtp($otp): bool
+    public function verifyOtp(string $otp): bool
     {
         $nonce = md5(Str::random());
         $tries = 3;
@@ -34,7 +34,10 @@ class Yubikey
         return $status === 'OK';
     }
 
-    private function request($otp, $nonce): Collection
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    private function request(string $otp, string $nonce): Collection
     {
         $queryParams = Collection::make([
             'id'    => $this->client_id,
@@ -80,6 +83,9 @@ class Yubikey
         return $params;
     }
 
+    /**
+     * @param mixed $data
+     */
     private function generateSignature($data): string
     {
         return base64_encode(

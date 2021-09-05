@@ -6,7 +6,7 @@ use Illuminate\Support\Str;
 
 class GenerateBackupCodes
 {
-    public function generate($total = 8): array
+    public function generate(int $total = 8): array
     {
         $codes = [];
 

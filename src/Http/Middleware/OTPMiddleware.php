@@ -9,13 +9,21 @@ use Illuminate\Support\Facades\Session;
 
 class OTPMiddleware
 {
+    /**
+     * @param Request $request
+     * @param Closure $next
+     * @return \Illuminate\Http\RedirectResponse|mixed
+     */
     public function handle(Request $request, Closure $next)
     {
         $user = $request->user();
 
         if ($user->has2FAEnabled())
         {
-            if ($value = Cookie::get(config('laravel2fa.remember_cookie.name')))
+            /** @var string|null $value */
+            $value = Cookie::get(config('laravel2fa.remember_cookie.name'));
+
+            if ($value)
             {
                 $token = $user->otpRememberTokens()
                     ->where('token', decrypt($value))
