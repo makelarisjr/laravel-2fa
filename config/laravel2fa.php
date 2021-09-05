@@ -23,5 +23,6 @@ return [
     'default_redirect' => '/dashboard',
 
     'register_routes'     => true,
-    'register_middleware' => true
+    'register_middleware' => true,
+    'routes_prefix'       => '/2fa'
 ];
