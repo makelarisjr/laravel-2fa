@@ -34,6 +34,9 @@ class Yubikey
         return $status === 'OK';
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function request(string $otp, string $nonce): Collection
     {
         $queryParams = Collection::make([
