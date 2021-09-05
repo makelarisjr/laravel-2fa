@@ -34,7 +34,7 @@ class Laravel2FAServiceProvider extends ServiceProvider
         }
     }
 
-    public function registerRoutes()
+    public function registerRoutes(): void
     {
         if (!config('laravel2fa.register_routes')) return;
         Route::group(['prefix' => '/2fa', 'middleware' => ['web', 'auth']], function() {
@@ -42,7 +42,7 @@ class Laravel2FAServiceProvider extends ServiceProvider
         });
     }
 
-    public function registerMiddleware()
+    public function registerMiddleware(): void
     {
         if (!config('laravel2fa.register_middleware')) return;
         $router = $this->app->make(Router::class);

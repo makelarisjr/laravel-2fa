@@ -16,7 +16,7 @@ class GenerateGoogleQRCode
         $this->secret = $secret;
     }
 
-    public function generate($name = 'Laravel', $size = 200): string
+    public function generate(string $name = 'Laravel', int $size = 200): string
     {
         $renderer = new ImageRenderer(
             new RendererStyle($size),
