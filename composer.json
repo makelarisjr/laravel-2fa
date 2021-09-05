@@ -1,6 +1,7 @@
 {
     "name": "makelarisjr/laravel-2fa",
     "license": "MIT",
+    "keywords": ["laravel", "authentication", "2fa", "ubikey", "otp", "totp"],
     "autoload": {
         "psr-4": {
             "MakelarisJR\\Laravel2FA\\": "src/"
