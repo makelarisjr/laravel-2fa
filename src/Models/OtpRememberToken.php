@@ -4,7 +4,18 @@ namespace MakelarisJR\Laravel2FA\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Carbon;
 
+/**
+ * @property int    $id
+ * @property string $token
+ * @property string $model_type
+ * @property int    $model_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ *
+ * @property-read Model $models
+ */
 class OtpRememberToken extends Model
 {
     protected $casts = [
