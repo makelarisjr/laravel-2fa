@@ -16,6 +16,10 @@
         {
             "name": "makelarisjr",
             "email": "makelarisjr@hackthebox.eu"
+        },
+        {
+            "name": "Meletis Flevarakis",
+            "email": "meletis@flevarakis.xyz"
         }
     ],
     "require": {
