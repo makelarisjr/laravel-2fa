@@ -5,8 +5,8 @@ namespace MakelarisJR\Laravel2FA\Tests\Services;
 use MakelarisJR\Laravel2FA\Services\Laravel2FA;
 use Orchestra\Testbench\TestCase;
 
-class Laravel2FATest extends TestCase {
-
+class Laravel2FATest extends TestCase
+{
     protected function defineEnvironment($app)
     {
         $app['config']->set('laravel2fa.yubikey.client_id', 'THIS_IS_A_TEST');
@@ -27,5 +27,4 @@ class Laravel2FATest extends TestCase {
     {
         $this->markTestIncomplete();
     }
-
 }

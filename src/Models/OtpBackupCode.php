@@ -22,7 +22,7 @@ class OtpBackupCode extends Model
     protected $fillable = ['code', 'used_at'];
 
     protected $dates = [
-        'used_at'
+        'used_at',
     ];
 
     public function model(): MorphTo

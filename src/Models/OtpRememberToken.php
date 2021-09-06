@@ -19,11 +19,11 @@ use Illuminate\Support\Carbon;
 class OtpRememberToken extends Model
 {
     protected $casts = [
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
     ];
 
     protected $fillable = [
-        'token'
+        'token',
     ];
 
     public function model(): MorphTo

@@ -11,7 +11,7 @@ class Laravel2FA
 
     public function __construct()
     {
-        $this->google2fa  = new Google2FA();
+        $this->google2fa = new Google2FA();
         $this->yubikey2fa = new Yubikey(
             config('laravel2fa.yubikey.client_id'),
             config('laravel2fa.yubikey.secret_key'),

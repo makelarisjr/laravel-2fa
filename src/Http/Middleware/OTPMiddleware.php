@@ -18,25 +18,21 @@ class OTPMiddleware
     {
         $user = $request->user();
 
-        if ($user->has2FAEnabled())
-        {
+        if ($user->has2FAEnabled()) {
             /** @var string|null $value */
             $value = Cookie::get(config('laravel2fa.remember_cookie.name'));
 
-            if ($value)
-            {
+            if ($value) {
                 $token = $user->otpRememberTokens()
                     ->where('token', decrypt($value))
                     ->first();
 
-                if ($token && !$token->hasExpired())
-                {
+                if ($token && ! $token->hasExpired()) {
                     return $next($request);
                 }
             }
 
-            if (Session::has('2fa_passed'))
-            {
+            if (Session::has('2fa_passed')) {
                 return $next($request);
             }
 
