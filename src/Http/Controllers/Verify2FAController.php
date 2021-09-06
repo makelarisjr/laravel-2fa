@@ -12,12 +12,10 @@ class Verify2FAController extends Controller
     public function __invoke(Request $request): RedirectResponse
     {
         $user = $request->user();
-        $otp  = $request->input('otp');
+        $otp = $request->input('otp');
 
-        if($user->verifyOtp($otp))
-        {
-            if (config('laravel2fa.remember_cookie.enabled'))
-            {
+        if ($user->verifyOtp($otp)) {
+            if (config('laravel2fa.remember_cookie.enabled')) {
                 $token = $user->generateOtpRememberToken();
                 Cookie::queue(
                     config('laravel2fa.remember_cookie.name'),

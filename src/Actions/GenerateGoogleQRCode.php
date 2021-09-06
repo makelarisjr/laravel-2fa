@@ -25,6 +25,6 @@ class GenerateGoogleQRCode
         $writer = new Writer($renderer);
         $data = $writer->writeString("otpauth://totp/${name}?secret={$this->secret}", 'utf-8');
 
-        return 'data:image/svg+xml;base64,' . base64_encode($data);
+        return 'data:image/svg+xml;base64,'.base64_encode($data);
     }
 }

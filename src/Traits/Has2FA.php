@@ -32,17 +32,15 @@ trait Has2FA
 
     public function verifyOtp(string $otp): bool
     {
-        if ($code = $this->otpBackupCodes()->where('code', $otp)->whereNull('used_at')->first())
-        {
+        if ($code = $this->otpBackupCodes()->where('code', $otp)->whereNull('used_at')->first()) {
             $code->update([
-                'used_at' => Carbon::now()
+                'used_at' => Carbon::now(),
             ]);
 
             return true;
         }
 
-        if (Str::length($otp) === 44)
-        {
+        if (Str::length($otp) === 44) {
             return $this->otpDevices()
                     ->where('type', OtpDevice::TYPE_YUBIKEY)
                     ->where('otp_secret', Str::substr($otp, 0, 12))
@@ -51,16 +49,13 @@ trait Has2FA
                 && Laravel2FA::verifyYubikeyOTP($otp);
         }
 
-        if (config('laravel2fa.google.enabled'))
-        {
+        if (config('laravel2fa.google.enabled')) {
             $secrets = $this->otpDevices()
                 ->where('type', OtpDevice::TYPE_GOOGLE)
                 ->pluck('otp_secret');
 
-            foreach ($secrets as $secret)
-            {
-                if (Laravel2FA::verifyGoogleOTP($otp, $secret))
-                {
+            foreach ($secrets as $secret) {
+                if (Laravel2FA::verifyGoogleOTP($otp, $secret)) {
                     return true;
                 }
             }
@@ -71,8 +66,7 @@ trait Has2FA
 
     public function addDevice(string $name, string $otp_secret, string $type = OtpDevice::TYPE_GOOGLE): OtpDevice
     {
-        if (Str::length($otp_secret) === 44)
-        {
+        if (Str::length($otp_secret) === 44) {
             $otp_secret = Str::substr($otp_secret, 0, 12);
         }
 
@@ -94,8 +88,7 @@ trait Has2FA
 
     public function generateBackupCodes(int $total = 8, $force = false): array
     {
-        if ($this->otpBackupCodes()->exists() && !$force)
-        {
+        if ($this->otpBackupCodes()->exists() && ! $force) {
             return [];
         }
 
@@ -106,7 +99,7 @@ trait Has2FA
         Collection::make($codes)
             ->each(fn ($code) => $this->otpBackupCodes()->save(
                 new OtpBackupCode([
-                    'code' => $code
+                    'code' => $code,
                 ])
             ));
 
@@ -119,7 +112,7 @@ trait Has2FA
 
         $this->otpRememberTokens()
             ->save(new OtpRememberToken([
-                'token' => $token
+                'token' => $token,
             ]));
 
         return $token;
