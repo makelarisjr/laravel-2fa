@@ -15,7 +15,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Model $models
+ * @property-read Model $model
  */
 class OtpBackupCode extends Model
 {
@@ -25,7 +25,7 @@ class OtpBackupCode extends Model
         'used_at'
     ];
 
-    public function models(): MorphTo
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }

@@ -14,7 +14,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Model $models
+ * @property-read Model $model
  */
 class OtpRememberToken extends Model
 {
@@ -26,7 +26,7 @@ class OtpRememberToken extends Model
         'token'
     ];
 
-    public function models(): MorphTo
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }

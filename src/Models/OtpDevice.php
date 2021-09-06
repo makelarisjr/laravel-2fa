@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Collection $models
+ * @property-read Model $model
  */
 class OtpDevice extends Model
 {
@@ -30,7 +30,7 @@ class OtpDevice extends Model
         'name', 'type', 'otp_secret'
     ];
 
-    public function models(): MorphTo
+    public function model(): MorphTo
     {
         return $this->morphTo();
     }
