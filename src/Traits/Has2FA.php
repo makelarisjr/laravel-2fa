@@ -30,13 +30,8 @@ trait Has2FA
         return $this->morphMany(OtpRememberToken::class, 'model');
     }
 
-    public function verifyOtp(string $otp, $secret = null): bool
+    public function verifyOtp(string $otp): bool
     {
-        if ($secret !== null)
-        {
-            return Laravel2FA::verifyGoogleOTP($otp, $secret);
-        }
-
         if ($code = $this->otpBackupCodes()->where('code', $otp)->whereNull('used_at')->first())
         {
             $code->update([
