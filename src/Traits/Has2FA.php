@@ -92,7 +92,7 @@ trait Has2FA
         return compact('secret', 'qrcode');
     }
 
-    public function generateBackupCodes($force = false): array
+    public function generateBackupCodes(int $total = 8, $force = false): array
     {
         if ($this->otpBackupCodes()->exists() && !$force)
         {
@@ -101,7 +101,7 @@ trait Has2FA
 
         $this->otpBackupCodes()->delete();
 
-        $codes = (new GenerateBackupCodes())->generate();
+        $codes = (new GenerateBackupCodes())->generate($total);
 
         Collection::make($codes)
             ->each(fn ($code) => $this->otpBackupCodes()->save(
