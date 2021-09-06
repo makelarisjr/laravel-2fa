@@ -21,7 +21,14 @@ class Laravel2FAServiceProvider extends ServiceProvider
         {
             $this->publishes([
                 __DIR__ . '/../config/laravel2fa.php' => config_path('laravel2fa.php')
-            ], 'config');
+            ], 'laravel2fa-config');
+            $this->publishes([
+                __DIR__ . '/../database/migrations' => database_path('migrations')
+            ], 'laravel2fa-migrations');
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/laravel2fa')
+            ], 'laravel2fa-views');
+
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
         }
 
