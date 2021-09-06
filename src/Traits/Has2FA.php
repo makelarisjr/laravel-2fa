@@ -69,8 +69,13 @@ trait Has2FA
         return false;
     }
 
-    public function addDevice($name, $otp_secret, $type = OtpDevice::TYPE_GOOGLE): OtpDevice
+    public function addDevice(string $name, string $otp_secret, string $type = OtpDevice::TYPE_GOOGLE): OtpDevice
     {
+        if (Str::length($otp_secret) === 44)
+        {
+            $otp_secret = Str::substr($otp_secret, 0, 12);
+        }
+
         $device = new OtpDevice(
             compact('name', 'type', 'otp_secret')
         );
