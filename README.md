@@ -2,6 +2,8 @@
 
 This package provides all the necessary tools for a complete implementation of Google's OTP and Yubikey 2FA.
 
+[![Latest Stable Version](http://poser.pugx.org/makelarisjr/laravel-2fa/v)](https://packagist.org/packages/makelarisjr/laravel-2fa) [![Total Downloads](http://poser.pugx.org/makelarisjr/laravel-2fa/downloads)](https://packagist.org/packages/makelarisjr/laravel-2fa) [![Latest Unstable Version](http://poser.pugx.org/makelarisjr/laravel-2fa/v/unstable)](https://packagist.org/packages/makelarisjr/laravel-2fa) [![License](http://poser.pugx.org/makelarisjr/laravel-2fa/license)](https://packagist.org/packages/makelarisjr/laravel-2fa) [![PHP Version Require](http://poser.pugx.org/makelarisjr/laravel-2fa/require/php)](https://packagist.org/packages/makelarisjr/laravel-2fa)
+
 ## Requirements
 + **PHP:** >=7.4
 + **Laravel:** >=7.0
