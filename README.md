@@ -10,7 +10,7 @@ This package provides all the necessary tools for a complete implementation of G
 
 Type the following command in your terminal/command line:
 
-```composer require makerarisjr/laravel2fa```
+```composer require makelarisjr/laravel-2fa```
 
 The service provider will automatically get registered. You may also manually add the service provider in your config/app.php file:
 
