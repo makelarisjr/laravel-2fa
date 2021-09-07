@@ -18,6 +18,8 @@ class CreateOtpBackupCodesTable extends Migration
             $table->timestamp('used_at')
                 ->nullable();
 
+            $table->index(['model_id', 'model_type']);
+
             $table->timestamps();
         });
     }
