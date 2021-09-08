@@ -11,8 +11,7 @@ class CreateOtpRememberTokensTable extends Migration
         Schema::create('otp_remember_tokens', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('token')
-                ->unique();
+            $table->string('token');
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
 
