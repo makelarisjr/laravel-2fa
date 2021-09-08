@@ -116,6 +116,10 @@ The first numeric parameter designates the total number of codes that will be ge
 The second parameter, force, designates whether new codes will be generated. Once the backup codes are created, it is not possible to create them again, unless you set `force` to true which in that case, the old ones will be deleted
 and a new batch will be created.
 
+### Extended Documentation
+
+For the extended documentation please refer to the [Wiki](https://github.com/makelarisjr/laravel-2fa/wiki)
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel2FA, please send an e-mail to makelarisjr via [makelarisjr@hackthebox.eu](mailto:makelarisjr@hackthebox.eu). All security vulnerabilities will be promptly addressed.
