@@ -13,8 +13,7 @@ class CreateOtpDevicesTable extends Migration
 
             $table->string('name');
             $table->string('type');
-            $table->string('otp_secret')
-                ->unique();
+            $table->string('otp_secret');
             $table->string('model_type');
             $table->unsignedBigInteger('model_id');
 
