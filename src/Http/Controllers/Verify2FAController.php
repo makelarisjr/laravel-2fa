@@ -3,20 +3,20 @@
 namespace MakelarisJR\Laravel2FA\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use MakelarisJR\Laravel2FA\Http\Requests\Verify2FARequest;
 
 class Verify2FAController extends Controller
 {
-    public function __invoke(Request $request): RedirectResponse
+    public function __invoke(Verify2FARequest $request): RedirectResponse
     {
         $user = $request->user();
         $otp  = $request->input('otp');
 
         if($user->verifyOtp($otp))
         {
-            if (config('laravel2fa.remember_cookie.enabled'))
+            if (config('laravel2fa.remember_cookie.enabled') && $request->filled('remember_device'))
             {
                 $token = $user->generateOtpRememberToken();
                 Cookie::queue(
