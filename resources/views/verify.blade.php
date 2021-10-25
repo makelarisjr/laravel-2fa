@@ -36,6 +36,18 @@
                                     autofocus="autofocus"
                                     autocomplete="off"
                             />
+
+                            @if (config('laravel2fa.remember_cookie.enabled'))
+                                <label for="remember_device">
+                                    <input
+                                            class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                            id="remember_device"
+                                            type="checkbox"
+                                            name="remember_device"
+                                    />
+                                    <span class="text-sm">Remember this device</span>
+                                </label>
+                            @endif
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
