@@ -18,7 +18,7 @@ class ShouldVerify
     {
         $user = $request->user();
 
-        if (! $user->has2FAEnabled() or Session::has('2fa_passed'))
+        if (! $user->has2FAEnabled() || Session::has('2fa_passed'))
         {
             return redirect(
                 config('laravel2fa.default_redirect', '/dashboard')
