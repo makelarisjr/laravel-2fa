@@ -31,7 +31,8 @@
     "require-dev": {
         "orchestra/testbench": "^6.0",
         "nunomaduro/larastan": "^1.0",
-        "nunomaduro/collision": "^5.3"
+        "nunomaduro/collision": "^5.3",
+        "friendsofphp/php-cs-fixer": "^3.2"
     },
     "extra": {
         "laravel": {
