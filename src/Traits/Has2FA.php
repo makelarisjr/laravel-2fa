@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use MakelarisJR\Laravel2FA\Actions\GenerateBackupCodes;
 use MakelarisJR\Laravel2FA\Actions\GenerateGoogleQRCode;
+use MakelarisJR\Laravel2FA\Events\BackupCodeUsed;
 use MakelarisJR\Laravel2FA\Facades\Laravel2FA;
 use MakelarisJR\Laravel2FA\Models\OtpBackupCode;
 use MakelarisJR\Laravel2FA\Models\OtpDevice;
@@ -37,6 +38,8 @@ trait Has2FA
             $code->update([
                 'used_at' => Carbon::now()
             ]);
+
+            broadcast(new BackupCodeUsed($this, $otp));
 
             return true;
         }
