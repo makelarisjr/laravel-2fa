@@ -4,7 +4,6 @@ namespace MakelarisJR\Laravel2FA\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 
 class ShouldVerify
@@ -18,8 +17,7 @@ class ShouldVerify
     {
         $user = $request->user();
 
-        if (! $user->has2FAEnabled() || Session::has('2fa_passed'))
-        {
+        if (!$user->has2FAEnabled() || Session::has('2fa_passed')) {
             return redirect(
                 config('laravel2fa.default_redirect', '/dashboard')
             );

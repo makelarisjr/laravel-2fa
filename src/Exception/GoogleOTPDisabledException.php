@@ -2,7 +2,7 @@
 
 namespace MakelarisJR\Laravel2FA\Exception;
 
-use \Exception;
+use Exception;
 
 class GoogleOTPDisabledException extends Exception
 {
