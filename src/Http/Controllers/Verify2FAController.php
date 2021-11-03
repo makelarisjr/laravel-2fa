@@ -31,7 +31,7 @@ class Verify2FAController extends Controller
 
             Session::put('2fa_passed', true);
 
-            broadcast(new UserAuthorized($user, $remember));
+            event(new UserAuthorized($user, $remember));
 
             return redirect(Session::get(
                 '2fa_redirect_to',
@@ -39,7 +39,7 @@ class Verify2FAController extends Controller
             ));
         }
 
-        broadcast(new AuthorizationFailed($user));
+        event(new AuthorizationFailed($user));
 
         return redirect()
             ->back()

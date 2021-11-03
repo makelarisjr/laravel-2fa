@@ -39,7 +39,7 @@ trait Has2FA
                 'used_at' => Carbon::now()
             ]);
 
-            broadcast(new BackupCodeUsed($this, $otp));
+            event(new BackupCodeUsed($this, $otp));
 
             return true;
         }
