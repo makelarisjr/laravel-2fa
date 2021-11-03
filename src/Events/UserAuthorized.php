@@ -15,8 +15,8 @@ class UserAuthorized
 {
     use Dispatchable, SerializesModels;
 
-    private $authenticatable;
-    private $remember;
+    public Authenticatable $authenticatable;
+    public bool $remember;
 
     /**
      * @return void

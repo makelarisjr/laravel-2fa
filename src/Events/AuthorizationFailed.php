@@ -15,7 +15,7 @@ class AuthorizationFailed
 {
     use Dispatchable, SerializesModels;
 
-    private $authenticatable;
+    public Authenticatable $authenticatable;
 
     /**
      * @return void

@@ -15,8 +15,8 @@ class BackupCodeUsed
 {
     use Dispatchable, SerializesModels;
 
-    private $authenticatable;
-    private $code;
+    public Authenticatable $authenticatable;
+    public string $code;
 
     /**
      * @return void
