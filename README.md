@@ -29,6 +29,8 @@ Publish the configuration file by typing the following command:
 php artisan vendor:publish --provider="MakelarisJR\Laravel2FA\Laravel2FAServiceProvider"
 ```
 
+For more info about the configuration, please refer to the [Wiki article](https://github.com/makelarisjr/laravel-2fa/wiki/Configuration)
+
 Next, you have to add the necessary trait to the authenticatable model. This package can be used by any model, and you are not limited only to the User model.
 
 ```php
