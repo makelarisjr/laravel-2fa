@@ -15,7 +15,8 @@ class Laravel2FA
     {
         $this->google2fa = new Google2FA();
 
-        if (config('laravel2fa.yubikey.enabled')) {
+        if (config('laravel2fa.yubikey.enabled'))
+        {
             $this->yubikey2fa = new Yubikey(
                 config('laravel2fa.yubikey.client_id'),
                 config('laravel2fa.yubikey.secret_key'),
@@ -43,7 +44,8 @@ class Laravel2FA
      */
     public function verifyGoogleOTP(string $otp, string $secret)
     {
-        if (!config('laravel2fa.google.enabled')) {
+        if (!config('laravel2fa.google.enabled'))
+        {
             throw new GoogleOTPDisabledException('Google OTP is disabled.');
         }
 
@@ -59,7 +61,8 @@ class Laravel2FA
      */
     public function verifyYubikeyOTP(string $otp): bool
     {
-        if (!config('laravel2fa.yubikey.enabled')) {
+        if (!config('laravel2fa.yubikey.enabled'))
+        {
             throw new YubikeyOTPDisabledException('Yubikey OTP is disabled.');
         }
 

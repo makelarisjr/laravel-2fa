@@ -27,9 +27,11 @@ class Yubikey
         $nonce = md5(Str::random());
         $tries = 3;
 
-        do {
+        do
+        {
             $status = $this->request($otp, $nonce)['status'];
-        } while (--$tries !== 0 && $status !== 'OK');
+        }
+        while (--$tries !== 0 && $status !== 'OK');
 
         return $status === 'OK';
     }
@@ -54,13 +56,15 @@ class Yubikey
             ]
         );
 
-        if ($req->getStatusCode() !== 200) {
+        if ($req->getStatusCode() !== 200)
+        {
             return Collection::make(['status' => 'request failed']);
         }
 
         $params = $this->parseResponseBody($req->getBody()->getContents());
 
-        if ($params['h'] !== $this->generateSignature($params->except('h')->sortKeys()->toArray())) {
+        if ($params['h'] !== $this->generateSignature($params->except('h')->sortKeys()->toArray()))
+        {
             return Collection::make(['status' => 'validation failed']);
         }
 
@@ -71,8 +75,10 @@ class Yubikey
     {
         $params = Collection::make();
 
-        foreach (explode("\r\n", $body) as $param) {
-            if ($param === '') {
+        foreach (explode("\r\n", $body) as $param)
+        {
+            if ($param === '')
+            {
                 continue;
             }
             [$key, $value] = explode('=', $param, 2);

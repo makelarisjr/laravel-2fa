@@ -17,8 +17,10 @@ class Verify2FAController extends Controller
         $otp = $request->input('otp');
         $remember = $request->filled('remember_device');
 
-        if ($user->verifyOtp($otp)) {
-            if (config('laravel2fa.remember_cookie.enabled') && $remember) {
+        if ($user->verifyOtp($otp))
+        {
+            if (config('laravel2fa.remember_cookie.enabled') && $remember)
+            {
                 $token = $user->generateOtpRememberToken();
                 Cookie::queue(
                     config('laravel2fa.remember_cookie.name'),

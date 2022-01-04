@@ -10,7 +10,8 @@ class GenerateBackupCodes
     {
         $codes = [];
 
-        for ($i = 0; $i < $total; $i++) {
+        for ($i = 0; $i < $total; $i++)
+        {
             $codes[] = implode('-', [Str::random(5), Str::random(5)]);
         }
 
