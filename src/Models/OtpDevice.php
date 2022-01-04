@@ -2,7 +2,6 @@
 
 namespace MakelarisJR\Laravel2FA\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Carbon;
@@ -21,13 +20,13 @@ use Illuminate\Support\Carbon;
  */
 class OtpDevice extends Model
 {
-    const TYPE_GOOGLE  = 'google';
+    const TYPE_GOOGLE = 'google';
     const TYPE_YUBIKEY = 'yubikey';
 
     protected $hidden = ['otp_secret'];
 
     protected $fillable = [
-        'name', 'type', 'otp_secret'
+        'name', 'type', 'otp_secret',
     ];
 
     public function model(): MorphTo

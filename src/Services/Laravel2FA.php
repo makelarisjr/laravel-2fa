@@ -13,7 +13,7 @@ class Laravel2FA
 
     public function __construct()
     {
-        $this->google2fa  = new Google2FA();
+        $this->google2fa = new Google2FA();
 
         if (config('laravel2fa.yubikey.enabled'))
         {

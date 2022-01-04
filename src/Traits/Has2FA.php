@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use MakelarisJR\Laravel2FA\Actions\GenerateBackupCodes;
 use MakelarisJR\Laravel2FA\Actions\GenerateGoogleQRCode;
+use MakelarisJR\Laravel2FA\Events\BackupCodeUsed;
 use MakelarisJR\Laravel2FA\Facades\Laravel2FA;
 use MakelarisJR\Laravel2FA\Models\OtpBackupCode;
 use MakelarisJR\Laravel2FA\Models\OtpDevice;
@@ -35,8 +36,10 @@ trait Has2FA
         if ($code = $this->otpBackupCodes()->where('code', $otp)->whereNull('used_at')->first())
         {
             $code->update([
-                'used_at' => Carbon::now()
+                'used_at' => Carbon::now(),
             ]);
+
+            event(new BackupCodeUsed($this, $otp));
 
             return true;
         }
@@ -106,7 +109,7 @@ trait Has2FA
         Collection::make($codes)
             ->each(fn ($code) => $this->otpBackupCodes()->save(
                 new OtpBackupCode([
-                    'code' => $code
+                    'code' => $code,
                 ])
             ));
 
@@ -119,7 +122,7 @@ trait Has2FA
 
         $this->otpRememberTokens()
             ->save(new OtpRememberToken([
-                'token' => $token
+                'token' => $token,
             ]));
 
         return $token;

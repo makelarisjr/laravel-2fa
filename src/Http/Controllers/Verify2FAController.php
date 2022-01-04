@@ -5,6 +5,8 @@ namespace MakelarisJR\Laravel2FA\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
+use MakelarisJR\Laravel2FA\Events\AuthorizationFailed;
+use MakelarisJR\Laravel2FA\Events\UserAuthorized;
 use MakelarisJR\Laravel2FA\Http\Requests\Verify2FARequest;
 
 class Verify2FAController extends Controller
@@ -12,11 +14,12 @@ class Verify2FAController extends Controller
     public function __invoke(Verify2FARequest $request): RedirectResponse
     {
         $user = $request->user();
-        $otp  = $request->input('otp');
+        $otp = $request->input('otp');
+        $remember = $request->filled('remember_device');
 
-        if($user->verifyOtp($otp))
+        if ($user->verifyOtp($otp))
         {
-            if (config('laravel2fa.remember_cookie.enabled') && $request->filled('remember_device'))
+            if (config('laravel2fa.remember_cookie.enabled') && $remember)
             {
                 $token = $user->generateOtpRememberToken();
                 Cookie::queue(
@@ -28,11 +31,15 @@ class Verify2FAController extends Controller
 
             Session::put('2fa_passed', true);
 
+            event(new UserAuthorized($user, $remember));
+
             return redirect(Session::get(
                 '2fa_redirect_to',
                 config('laravel2fa.default_redirect', '/dashboard')
             ));
         }
+
+        event(new AuthorizationFailed($user));
 
         return redirect()
             ->back()

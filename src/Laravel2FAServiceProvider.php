@@ -20,13 +20,13 @@ class Laravel2FAServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole())
         {
             $this->publishes([
-                __DIR__ . '/../config/laravel2fa.php' => config_path('laravel2fa.php')
+                __DIR__ . '/../config/laravel2fa.php' => config_path('laravel2fa.php'),
             ], 'laravel2fa-config');
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations')
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
             ], 'laravel2fa-migrations');
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/laravel2fa')
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/laravel2fa'),
             ], 'laravel2fa-views');
 
             $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
@@ -43,15 +43,21 @@ class Laravel2FAServiceProvider extends ServiceProvider
 
     public function registerRoutes(): void
     {
-        if (!config('laravel2fa.register_routes')) return;
-        Route::group(['prefix' => config('laravel2fa.routes_prefix'), 'middleware' => ['web', 'auth']], function() {
+        if (!config('laravel2fa.register_routes'))
+        {
+            return;
+        }
+        Route::group(['prefix' => config('laravel2fa.routes_prefix'), 'middleware' => ['web', 'auth']], function () {
             $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         });
     }
 
     public function registerMiddleware(): void
     {
-        if (!config('laravel2fa.register_middleware')) return;
+        if (!config('laravel2fa.register_middleware'))
+        {
+            return;
+        }
         $router = $this->app->make(Router::class);
         $router->aliasMiddleware('otp', OTPMiddleware::class);
     }

@@ -16,10 +16,10 @@ class Yubikey
 
     public function __construct(string $client_id, string $secret, string $api_server)
     {
-        $this->client_id  = $client_id;
-        $this->secret     = base64_decode($secret);
+        $this->client_id = $client_id;
+        $this->secret = base64_decode($secret);
         $this->api_server = $api_server;
-        $this->client     = new Client();
+        $this->client = new Client();
     }
 
     public function verifyOtp(string $otp): bool
@@ -27,9 +27,11 @@ class Yubikey
         $nonce = md5(Str::random());
         $tries = 3;
 
-        do {
+        do
+        {
             $status = $this->request($otp, $nonce)['status'];
-        } while(--$tries !== 0 && $status !== 'OK');
+        }
+        while (--$tries !== 0 && $status !== 'OK');
 
         return $status === 'OK';
     }
@@ -42,7 +44,7 @@ class Yubikey
         $queryParams = Collection::make([
             'id'    => $this->client_id,
             'otp'   => $otp,
-            'nonce' => $nonce
+            'nonce' => $nonce,
         ]);
         $queryParams->put('h', $this->generateSignature($queryParams->sortKeys()->toArray()));
 
@@ -50,7 +52,7 @@ class Yubikey
             "https://{$this->api_server}/wsapi/2.0/verify",
             [
                 RequestOptions::QUERY   => $queryParams->toArray(),
-                RequestOptions::TIMEOUT => 5
+                RequestOptions::TIMEOUT => 5,
             ]
         );
 
@@ -75,7 +77,10 @@ class Yubikey
 
         foreach (explode("\r\n", $body) as $param)
         {
-            if ($param === "") continue;
+            if ($param === '')
+            {
+                continue;
+            }
             [$key, $value] = explode('=', $param, 2);
             $params->put($key, $value);
         }
